@@ -47,6 +47,43 @@ ActionMailerAutoPreviews.setup do |config|
 end
 ```
 
+###### Enabling / Disabling
+By default, the gem will be enabled in development mode. To have finer control, you can set `config.enabled` to false.
+```ruby
+config.enabled = false # Set to false to disable
+```
+
+###### History limit
+You can control how many automatic email previews are kept around for your viewing. By default, this is set to `10`. You can see past automatic emails by visiting `http://localhost:3000/rails/mailers/action_mailer_auto_previews`.
+```ruby
+config.history_limit = 50 # Keep 50 previews
+```
+
+###### Intecept Mode
+The default behavior is to automatically launch your default browser to the newly generate email preview, and then suppress the default implementation of `deliver` or `deliver_later`. If you would like it to launch your browser _and_ continue with the original `deliver` and `deliver_later`, simply set this configuration value to `:preview_and_deliver`
+```ruby
+config.intercept_mode = :preview_and_deliver # Show preview and still "deliver"
+```
+
+###### Automatic Browser Launching
+You can configure whether or not your default browser launches automatically. The default configuration is to automatically launch, however, if you choose to disable this, the URL to the newly-available email preview will be logged to the configured logger.
+```ruby
+config.launch_browser = false # Do not launch the default browser
+```
+![Terminal Output](http://blog.makifund.com/action_mailer_auto_previews/images/example_terminal_output.png)
+
+###### Logger
+When setting `config.launch_browser = false`, the URLs to the automatic email previews will be logged to the configured logger. By default, the logger is set to `Rails.logger` when Rails is detected, otherwise it will be `Logger.new(STDOUT)`
+```ruby
+config.logger = Logger.new(STDOUT)
+```
+
+###### Preview Host URL
+You can change the base URL that the gem uses to serve up the automatic email previews. This is helpful if you're not running your webserver on port 3000, or, you wish to use a different hostname, or any other reason.
+```ruby
+config.preview_host_url = "http://localhost:5000"
+```
+
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/makifund/action_mailer_auto_previews.
