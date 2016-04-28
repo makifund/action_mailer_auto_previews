@@ -1,0 +1,95 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Action mailer auto previews by makifund</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/github-light.css">
+    <script src="javascripts/scale.fix.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1 class="header">Action mailer auto previews</h1>
+        <p class="header"></p>
+
+        <ul>
+          <li class="download"><a class="buttons" href="https://github.com/makifund/action_mailer_auto_previews/zipball/master">Download ZIP</a></li>
+          <li class="download"><a class="buttons" href="https://github.com/makifund/action_mailer_auto_previews/tarball/master">Download TAR</a></li>
+          <li><a class="buttons github" href="https://github.com/makifund/action_mailer_auto_previews">View On GitHub</a></li>
+        </ul>
+
+        <p class="header">This project is maintained by <a class="header name" href="https://github.com/makifund">makifund</a></p>
+
+
+      </header>
+      <section>
+        <h1>
+<a id="actionmailerautopreviews" class="anchor" href="#actionmailerautopreviews" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>ActionMailerAutoPreviews</h1>
+
+<p>Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file <code>lib/action_mailer_auto_previews</code>. To experiment with that code, run <code>bin/console</code> for an interactive prompt.</p>
+
+<p>TODO: Delete this and the text above, and describe your gem</p>
+
+<h2>
+<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Installation</h2>
+
+<p>Add this line to your application's Gemfile :development group:</p>
+
+<div class="highlight highlight-source-ruby"><pre>group <span class="pl-c1">:development</span> <span class="pl-k">do</span>
+  <span class="pl-k">gem</span> <span class="pl-s"><span class="pl-pds">'</span>action_mailer_auto_previews<span class="pl-pds">'</span></span>
+<span class="pl-k">end</span></pre></div>
+
+<p>And then execute:</p>
+
+<pre><code>$ bundle
+</code></pre>
+
+<p>Or install it yourself as:</p>
+
+<pre><code>$ gem install action_mailer_auto_previews
+</code></pre>
+
+<h2>
+<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Usage</h2>
+
+<p>That's it! Simply include the gem in your Gemfile's :development group, and by default, you will be able to automatically see previews of your ActionMailer emails. Whenever <code>deliver</code> or <code>deliver_later</code>
+is called on one of your ActionMailers, the gem will automatically generate the ActionMailer::Preview required and open the preview in your default browser. However, there are several configuration options
+that can be used to alter this behavior.</p>
+
+<h2>
+<a id="configuration-options" class="anchor" href="#configuration-options" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Configuration Options</h2>
+
+<div class="highlight highlight-source-ruby"><pre><span class="pl-c1">ActionMailerAutoPreviews</span>.setup <span class="pl-k">do </span>|<span class="pl-smi">config</span>|
+  config.enabled <span class="pl-k">=</span> <span class="pl-c1">true</span>
+  config.history_limit <span class="pl-k">=</span> <span class="pl-c1">10</span>
+  config.intercept_mode <span class="pl-k">=</span> <span class="pl-c1">:preview_only</span> <span class="pl-c"># [:preview_only, :preview_and_deliver]</span>
+  config.launch_browser <span class="pl-k">=</span> <span class="pl-c1">true</span>
+  config.logger <span class="pl-k">=</span> <span class="pl-c1">Rails</span>.logger
+  config.preview_host_url <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">"</span>http://localhost:3000<span class="pl-pds">"</span></span>
+<span class="pl-k">end</span></pre></div>
+
+<h2>
+<a id="contributing" class="anchor" href="#contributing" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Contributing</h2>
+
+<p>Bug reports and pull requests are welcome on GitHub at <a href="https://github.com/makifund/action_mailer_auto_previews">https://github.com/makifund/action_mailer_auto_previews</a>.</p>
+
+<h2>
+<a id="license" class="anchor" href="#license" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>License</h2>
+
+<p>The gem is available as open source under the terms of the <a href="http://opensource.org/licenses/MIT">MIT License</a>.</p>
+      </section>
+      <footer>
+        <p><small>Hosted on <a href="https://pages.github.com">GitHub Pages</a> using the Dinky theme</small></p>
+      </footer>
+    </div>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+		
+  </body>
+</html>
