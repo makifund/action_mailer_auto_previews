@@ -33,9 +33,16 @@
         <h1>
 <a id="actionmailerautopreviews" class="anchor" href="#actionmailerautopreviews" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>ActionMailerAutoPreviews</h1>
 
-<p>Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file <code>lib/action_mailer_auto_previews</code>. To experiment with that code, run <code>bin/console</code> for an interactive prompt.</p>
+<p><img src="https://media.giphy.com/media/26AHFOLhi11OmM0Yo/giphy.gif" alt="Demo Video"></p>
 
-<p>TODO: Delete this and the text above, and describe your gem</p>
+<p>Enhances the ActionMailer Previews introduced in 4.1 by automatically creating ActionMailer Previews at runtime in development mode.
+See automatic previews of your ActionMailer emails, with no extra effort or mock data. Install the <code>action_mailer_auto_previews</code> gem
+into your :development group, and it'll 'just work' with sensible defaults. Each ActionMailer email object that has <code>.deliver</code> or
+<code>.deliver_later</code> called will automatically launch your default browser right to a ActionMailer Preview page with the real data
+passed to that email. Flexible options allow you to alter this behavior as well.</p>
+
+<p>Warning: Since this is dynamically creating Ruby classes/methods, you will want to make sure your web-server is single threaded.
+For example, if you're using Puma, be sure to set the <code>workers</code> configuration parameter to 1.</p>
 
 <h2>
 <a id="installation" class="anchor" href="#installation" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Installation</h2>
