@@ -2,6 +2,15 @@
 
 ![Demo Video](https://media.giphy.com/media/26AHFOLhi11OmM0Yo/giphy.gif)
 
+Enhances the ActionMailer Previews introduced in 4.1 by automatically creating ActionMailer Previews at runtime in development mode.
+See automatic previews of your ActionMailer emails, with no extra effort or mock data. Install the `action_mailer_auto_previews` gem
+into your :development group, and it'll 'just work' with sensible defaults. Each ActionMailer email object that has `.deliver` or
+`.deliver_later` called will automatically launch your default browser right to a ActionMailer Preview page with the real data
+passed to that email. Flexible options allow you to alter this behavior as well.
+
+Warning: Since this is dynamically creating Ruby classes/methods, you will want to make sure your web-server is single threaded.
+For example, if you're using Puma, be sure to set the `workers` configuration parameter to 1.
+
 ## Installation
 
 Add this line to your application's Gemfile :development group:
