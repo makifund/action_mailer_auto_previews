@@ -75,7 +75,6 @@ module ActionMailerAutoPreviews
 
     # Launch the default browser to the newly-available ActionMailer::Preview
     preview_url = "#{ActionMailerAutoPreviews.preview_host_url}/rails/mailers/action_mailer_auto_previews/automatic_preview_mailer/#{preview_key}"
-    # ActionMailerAutoPreviews.logger.debug("DEBUG: #{ActionMailer::Preview.all.first.preview_name}")
     ActionMailerAutoPreviews.launch_browser ? Launchy.open(preview_url) : ActionMailerAutoPreviews.logger.info("New ActionMailer::Preview available at #{preview_url}")
 
     # Clean up the cache if the number of generated previews now exceeds `history_limit`
@@ -94,7 +93,6 @@ module ActionMailerAutoPreviews
   # Check to see if we should be enabled or not, and if so, patch into ActionMailer
   if ActionMailerAutoPreviews.enabled
     class ActionMailer::MessageDelivery
-      #TODO Verify the options={} is the arguments to this method
       def deliver(options={})
         ActionMailerAutoPreviews.auto_preview(self)
         super(options) if ActionMailerAutoPreviews.intercept_mode == :preview_and_deliver
