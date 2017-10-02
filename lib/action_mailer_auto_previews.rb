@@ -57,6 +57,7 @@ module ActionMailerAutoPreviews
   end
 
   # This method is the magic sauce of what we're trying to achieve. It is called via the patch on ActionMailer::MessageDelivery
+  class AutomaticPreviewMailer < ActionMailer::Preview; end
   def self.auto_preview(message_delivery)
     # Generate a unique preview key
     preview_key = "preview_#{Time.now.to_i}#{rand(1000)}"
@@ -65,13 +66,11 @@ module ActionMailerAutoPreviews
     ActionMailerAutoPreviews::MAIL_CACHE[preview_key] = message_delivery
 
     # Dynamically add a ActionMailer::Preview method, named after `preview_key`
-    eval %Q(
-      class ActionMailerAutoPreviews::AutomaticPreviewMailer < ActionMailer::Preview
-        define_method("#{preview_key}") do
-          ActionMailerAutoPreviews::MAIL_CACHE["#{preview_key}"]
-        end
+    ActionMailerAutoPreviews::AutomaticPreviewMailer.class_eval do
+      define_method("#{preview_key}") do
+        ActionMailerAutoPreviews::MAIL_CACHE["#{preview_key}"]
       end
-    )
+    end
 
     # Launch the default browser to the newly-available ActionMailer::Preview
     preview_url = "#{ActionMailerAutoPreviews.preview_host_url}/rails/mailers/action_mailer_auto_previews/automatic_preview_mailer/#{preview_key}"
@@ -81,11 +80,12 @@ module ActionMailerAutoPreviews
     if ActionMailerAutoPreviews::MAIL_CACHE.count > ActionMailerAutoPreviews.history_limit
       preview_key_to_purge = ActionMailerAutoPreviews::MAIL_CACHE.keys.first # Get the oldest preview_key
       ActionMailerAutoPreviews::MAIL_CACHE.delete preview_key_to_purge # Delete the reference to the mail object
-      eval %Q(
-        class ActionMailerAutoPreviews::AutomaticPreviewMailer < ActionMailer::Preview
-          remove_method("#{preview_key_to_purge}")
-        end
-      ) # Removes the ActionMailer::Preview method, so the Preview is no longer available and the old URL will stop functioning
+
+      # Removes the ActionMailer::Preview method, so the Preview is no longer available and the old URL will stop functioning
+      ActionMailerAutoPreviews::AutomaticPreviewMailer.class_eval do
+        remove_method("#{preview_key_to_purge}")
+      end
+
       ActionMailerAutoPreviews.logger.info("ActionMailer::Preview #{preview_key_to_purge} has been purged, history buffer is full")
     end
   end
